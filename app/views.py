@@ -51,7 +51,7 @@ def user_logout(request):
 
 def register(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILE)
         if form.is_valid():
             register_form = form.save(commit=False)
             register_form.save()
