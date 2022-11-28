@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -5,7 +8,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-from .forms import OrderForm, InterestForm, LoginForm, RegisterForm
+from .forms import OrderForm, InterestForm, LoginForm, RegisterForm, ForgotPasswordForm
 from .models import Category, Product, Client, Order
 from django.shortcuts import get_object_or_404
 
@@ -76,29 +79,9 @@ def index(request):
         last = str(request.session['last_login'])
     cat_list = Category.objects.all().order_by('id')[:10]
     return render(request, 'app/index.html', {'cat_list': cat_list, 'last_login': "Your last login was "+ last})
-    # cat_list = Category.objects.all().order_by('id')[:10]
-    # response = HttpResponse()
-    # heading1 = '<p>' + 'List of categories: ' + '</p>'
-    # response.write(heading1)
-    # for category in cat_list:
-    #     para = '<p>'+ str(category.id) + ': ' + str(category) + '</p>'
-    #     response.write(para)
-    #
-    # product_list = Product.objects.all().order_by('-price')[:5]
-    # heading2 = '<p>' + 'List of products: ' + '</p>'
-    # response.write(heading2)
-    # for product in product_list:
-    #     para = '<p>' + str(product.name) + ': ' + str(product.price) + '</p>'
-    #     response.write(para)
-    #
-    # return response
 
 
 def about(request):
-    # response = HttpResponse()
-    # para = '<h2> This is an Online Store APP. </h2>'
-    # response.write(para)
-    # return response
 
     if 'about_visits' in request.session:
         request.session['about_visits'] += 1
@@ -109,21 +92,6 @@ def about(request):
 
 
 def detail(request, cat_no):
-    response = HttpResponse()
-    # category = get_object_or_404(Category, name=cat_no)
-    # product_list = Product.objects.filter(category=category)
-    # get_object_or_404()
-
-    # heading1 = '<H2>' + 'Category ' + cat_no + '</H2><br>'
-    # response.write(heading1)
-    # heading2 = '<H2>' + 'Warehouse ' + category.warehouse + '</H2>'
-    # response.write(heading2)
-    # product_list = Product.objects.filter(category=category)
-    # for product in product_list:
-    #     para = '<p>' + str(product.name) + '</p>'
-    #     response.write(para)
-    #
-    # return response
 
     category = get_object_or_404(Category, name=cat_no)
     product_list = Product.objects.filter(category=category)

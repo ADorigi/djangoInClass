@@ -34,6 +34,17 @@ class RegisterForm(forms.ModelForm):
         model = Client
         fields = ['username', 'password', 'first_name', 'last_name', 'email', 'company',
                   'shipping_address', 'city', 'province', 'photo']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'company': forms.TextInput(attrs={'class': 'form-control'}),
+            'shipping_address': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+
+        }
 
 
 class ForgotPasswordForm(forms.Form):
