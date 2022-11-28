@@ -6,10 +6,10 @@
 {% endblock %}
 {% block login_logout %}
     {% if request.user.is_authenticated %}
-        <li class="hbar1"><a href="{% url 'app:myorders' %}">My orders</a></li>
-        <li class="hbar1"><a href="{% url 'app:logout' %}">Logout</a></li>
+        <li class="list-group-item"><a href="{% url 'app:myorders' %}">My orders</a></li>
+        <li class="list-group-item"><a href="{% url 'app:logout' %}">Logout</a></li>
     {% else %}
-        <li class="hbar1"><a href="{% url 'app:login' %}">Login</a></li>
-        <li class="hbar1"><a href="{% url 'app:register' %}">Register</a></li>
+        <li class="list-group-item"><a href="{% url 'app:login' %}">Login</a></li>
+        <li class="list-group-item"><a href="{% url 'app:register' %}">Register</a></li>
     {% endif %}
 {% endblock %}
