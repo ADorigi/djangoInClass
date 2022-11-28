@@ -1,0 +1,16 @@
+{% extends 'app/base.html' %}
+{% block body_block %}
+    {% if cat_list %}
+        <h2>List of Categories</h2>
+        <ol>
+            {% for cat in cat_list %}
+                {#                <a href="{% url 'app:detail' cat.id %}">{{cat.name}}</a>#}
+                <li><a href="/app/{{ cat.name }}">{{ cat.name }}</a></li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <strong>There are no available categories!</strong>
+    {% endif %}
+
+    <h2>{{ last_login}}</h2>
+{% endblock %}

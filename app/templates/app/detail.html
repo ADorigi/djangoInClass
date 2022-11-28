@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+{% block body_block %}
+    <H2> Category {{ cat_no }} </H2>
+
+    <H2> Warehouse {{ category.warehouse }} </H2>
+
+    <ol>
+        {% for product in product_list %}
+            <li> {{ product.name }} </li>
+        {% endfor %}
+    </ol>
+{% endblock %}

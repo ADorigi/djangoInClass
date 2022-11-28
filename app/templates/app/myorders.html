@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+{% block body_block %}
+
+    {% if orders %}
+        <h2>Orders</h2>
+        <ol>
+            {% for order in orders %}
+                <p>Product: {{ order.product.name }}</p>
+                <p>Number of Units: {{ order.num_units }}</p>
+                <p>Status: {{ order.order_status }}</p>
+                <br>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <strong>There are no available orders!</strong>
+    {% endif %}
+
+{% endblock %}

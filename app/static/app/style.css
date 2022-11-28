@@ -1,0 +1,12 @@
+.hbar1 {
+    display: inline;
+    margin: 15px;
+}
+
+h1 {
+    background-color: lightblue;
+    color: brown;
+    font-size: 48px;
+    font-style: oblique;
+    position: center;
+}

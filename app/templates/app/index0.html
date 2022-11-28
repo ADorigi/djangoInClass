@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head lang="en">
+    <link rel="stylesheet" href="static/app/style.css" />
+    <meta charset="UTF-8">
+    <title>Online Store APP</title>
+</head>
+<body>
+    {% if cat_list %}
+        <h2>List of Categories</h2>
+        <ol>
+            {% for cat in cat_list %}
+{#                <a href="{% url 'app:detail' cat.id %}">{{cat.name}}</a>#}
+                <li><a href="/app/{{ cat.name }}">{{cat.name}}</a></li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <strong>There are no available categories!</strong>
+    {% endif %}
+</body>
+</html>
+
+{#<p><a href="/app/about">About page</a></p>#}
+<p><a href="{% url 'app:about'  %}">About page</a></p>
+

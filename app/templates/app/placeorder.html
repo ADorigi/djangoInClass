@@ -1,0 +1,19 @@
+{% extends 'app/base.html' %}
+{% block body_block %}
+    {% if prodlist %}
+        <h2>List of Products</h2>
+        <ol>
+            {% for prod in prodlist %}
+                {#                <a href="{% url 'app:detail' cat.id %}">{{cat.name}}</a>#}
+                <li><a href="/app/{{ prod.name }}">{{ prod.name }}</a></li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <strong>There are no available products!</strong>
+    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}
