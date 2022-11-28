@@ -51,7 +51,7 @@ def user_logout(request):
 
 def register(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST, request.FILE)
+        form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             register_form = form.save(commit=False)
             register_form.save()
@@ -63,14 +63,33 @@ def register(request):
         return render(request, 'app/register.html', {'form': form})
 
 
-@login_required
 def myorders(request):
     try:
         client = Client.objects.get(id = request.user.id)
         orders = Order.objects.filter(client=client)
         return render(request, 'app/myorders.html', {'orders': orders})
     except:
-        return HttpResponse('<h2>You are not a registered client!</h2>')
+        # return HttpResponse('<h2>You are not a registered client!</h2>')
+        form = LoginForm()
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    request.session['last_login'] = str(datetime.now())
+                    request.session.set_expiry(3600)
+                    client = Client.objects.get(id=request.user.id)
+                    orders = Order.objects.filter(client=client)
+                    return render(request, 'app/myorders.html', {'orders': orders})
+                    # return HttpResponseRedirect(reverse('app:index'))
+                else:
+                    return HttpResponse('Your account is disabled.')
+            else:
+                return HttpResponse('Invalid login details.')
+        else:
+            return render(request, 'app/login.html', {'form': form})
 
 
 def index(request):
