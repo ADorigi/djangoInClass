@@ -17,7 +17,7 @@ class Product(models.Model):
                                  on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    stock = models.PositiveIntegerField(default=100)
+    stock = models.PositiveIntegerField(default=100, validators=[MinValueValidator(0), MaxValueValidator(1000)])
     available = models.BooleanField(default=True)
     description = models.TextField(null=True, blank=True)
     interested = models.PositiveIntegerField(default=0)
