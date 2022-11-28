@@ -20,6 +20,9 @@
         <li class="hbar1"><a href="{% url 'app:index' %}">Click here to
             return to main page</a><br/></li>
     </ul>
+    <ul>
+    {% block login_logout %}*** {% endblock %}
+    </ul>
 </div>
 </body>
 </html>
