@@ -1,11 +1,11 @@
 {% extends 'app/base.html' %}
 {% block body_block %}
     {% if prodlist %}
-        <h2>List of Products</h2>
-        <ol>
+        <h3 style="margin-top: 30px; margin-left: 10px">List of Products:</h3>
+        <ol class="list-group" >
             {% for prod in prodlist %}
                 {#                <a href="{% url 'app:detail' cat.id %}">{{cat.name}}</a>#}
-                <li><a href="/app/products/{{ prod.id }}">{{ prod.name }}</a></li>
+                <li class="list-group-item"><a href="/app/products/{{ prod.id }}">{{ prod.name }}</a></li>
             {% endfor %}
         </ol>
     {% else %}

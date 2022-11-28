@@ -13,5 +13,5 @@ urlpatterns = [
     path('logout', views.user_logout, name='logout'),
     path('myorders', views.myorders, name='myorders'),
     path('register', views.register, name='register'),
-
+    path('forgot_password', views.forgot_password, name='forgot_password'),
     ]

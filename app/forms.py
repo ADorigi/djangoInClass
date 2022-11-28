@@ -19,17 +19,22 @@ class OrderForm(forms.ModelForm):
 
 class InterestForm(forms.Form):
     interested = forms.ChoiceField(widget=forms.RadioSelect, choices= ((1,'Yes'), (0,'No')))
-    comments = forms.CharField(widget=forms.Textarea)
-    quantity = forms.IntegerField(initial = 1,validators=[ MinValueValidator(1)])
-
+    quantity = forms.IntegerField(initial = 1,validators=[ MinValueValidator(1)], 
+        widget=forms.TextInput(attrs={'class': 'form-control'}))
+    comments = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+    
 
 class LoginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput)
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = ['username', 'password', 'first_name', 'last_name', 'email', 'company',
-                  'shipping_address', 'city', 'province']
+                  'shipping_address', 'city', 'province', 'photo']
+
+
+class ForgotPasswordForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

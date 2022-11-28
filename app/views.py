@@ -12,6 +12,9 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 
+from django.conf import settings
+from django.core.mail import send_mail
+
 from datetime import datetime
 
 # Create your views here.
@@ -178,3 +181,24 @@ def productdetail(request, prod_id):
                                                           'price': product.price,
                                                           'msg': msg})
 
+
+def forgot_password(request):
+    form = ForgotPasswordForm()
+    if request.method == 'POST':
+        username = request.POST['username']
+        try:
+            client = Client.objects.get(username=username)
+            letters = string.ascii_lowercase + string.ascii_uppercase
+            new_password = ''.join(random.choice(letters) for i in range(10))
+            subject = 'New password requested'
+            message = f"Hi {client.username}, your new password is '{new_password}'"
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [client.email,]
+            send_mail(subject, message, email_from, recipient_list)
+            client.set_password(new_password)
+            client.save()
+            return HttpResponse("<h2>Check email for your new password</h2>")
+        except:
+            return HttpResponse("<h2>Username does not exist</h2>")
+    else:
+        return render(request, 'app/forgot_password.html', {'form': form})

@@ -38,7 +38,9 @@ class Client(User):
     city = models.CharField(max_length=20, default="Windsor")
     province = models.CharField(max_length=2, choices=PROVINCE_CHOICES, default='ON')
     interested_in = models.ManyToManyField(Category)
+    photo = models.ImageField(upload_to='images', blank=True)
 
+    
     def get_interested_in(self):
         return ", ".join([str(p) for p in self.interested_in.all()])
 

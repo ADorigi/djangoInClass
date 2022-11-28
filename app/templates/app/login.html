@@ -1,10 +1,16 @@
 {% extends 'app/base.html' %}
 {% block body_block%}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit" />
-    </form>
+    <div class="'form-group" style="margin-left:24px; margin-top:24px">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <input type="submit" class="btn btn-primary" value="Submit" />
+                <a href="{% url 'app:forgot_password' %}"style="margin-left: 30px">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+
 {% endblock %}
 {% block login_logout %}
 
